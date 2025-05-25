@@ -1,14 +1,15 @@
 import axios from 'axios';
 
+// ✅ Temporarily hardcoded baseURL until env fix works
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: 'https://todo-backend1-rekm.onrender.com',
   headers: {
     'Content-Type': 'application/json',
   },
   withCredentials: true,
 });
 
-// ✅ Export fetchTasksByUser alongside the default api
+// ✅ Fetch tasks by user
 export const fetchTasksByUser = async (userId) => {
   const res = await api.get(`/api/tasks/user/${userId}`);
   return res.data;
