@@ -8,4 +8,10 @@ const api = axios.create({
   withCredentials: true,
 });
 
+// ✅ Export fetchTasksByUser alongside the default api
+export const fetchTasksByUser = async (userId) => {
+  const res = await api.get(`/api/tasks/user/${userId}`);
+  return res.data;
+};
+
 export default api;
