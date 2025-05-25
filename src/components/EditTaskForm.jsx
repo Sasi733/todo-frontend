@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import api from '../services/api';
 
 const EditTaskForm = ({ task, onClose, onUpdate }) => {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const EditTaskForm = ({ task, onClose, onUpdate }) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      await axios.patch(`http://localhost:5000/api/tasks/update/${task._id}`, formData);
+await api.patch(`/api/tasks/update/${task._id}`, formData);
       toast.success('Task updated successfully!');
       onUpdate();
       onClose();

@@ -5,6 +5,7 @@ import { fetchTasksByUser } from '../services/api';
 import CreateTaskForm from './CreateTaskForm';
 import EditTaskForm from './EditTaskForm';
 import { toast } from 'react-toastify';
+import api from '../services/api';
 
 const TaskDashboard = () => {
   const navigate = useNavigate(); // For redirecting to login
@@ -41,9 +42,8 @@ const TaskDashboard = () => {
 
   const markAsCompleted = async (taskId) => {
     try {
-      await axios.patch(`http://localhost:5000/api/tasks/update-status/${taskId}`, {
-        status: 'completed',
-      });
+     await api.patch(`/api/tasks/update-status/${taskId}`, { status: 'completed' });
+
       toast.success('Task marked as completed!');
       getTasks();
     } catch (err) {
@@ -58,7 +58,7 @@ const TaskDashboard = () => {
 
   const handleDelete = async (taskId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/delete/${taskId}`);
+await api.delete(`/api/tasks/delete/${taskId}`);
       toast.success('Task deleted successfully!');
       getTasks();
     } catch (err) {

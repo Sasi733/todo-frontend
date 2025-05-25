@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import api from '../services/api'; 
 const CreateTaskForm = ({ onCreate }) => {
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const userId = storedUser?._id || '';
@@ -27,10 +27,10 @@ const CreateTaskForm = ({ onCreate }) => {
     setIsSubmitting(true);
     try {
       console.log('Submitting task with userId:', userId); // Debug log
-      const response = await axios.post(`http://localhost:5000/api/tasks/add`, {
-        ...formData,
-        userId,
-      });
+      const response = await api.post(`/api/tasks/add`, {
+  ...formData,
+  userId,
+});
       console.log('Task creation response:', response.data); // Debug log
       setFormData({ title: '', description: '', dueDate: '' });
       toast.success('Task added successfully!');
